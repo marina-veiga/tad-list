@@ -145,7 +145,35 @@ void *sllGetFirst(SLList *l);
 void *sllGetNext(SLList *l);
 
 //Retorna uma nova lista que é a intersecção de l1 e l2
-SLList* sllInterseccao(SLList *l1, SLList *l2, int(*cmp)(void*,void*));
+SLList* sllInterseccao(SLList *l1, SLList *l2, int(*cmp)(void*,void*)){
+    SLNode *spec1, *spec2;
+    SLList *l3;
+    int stat;
+
+    if(l1!= NULL && l2!= NULL){
+        if(l1->first != NULL && l2->first != NULL){
+            l3= sllCreate();
+            if(l3 != NULL){
+                spec1 = l1->first;
+                while(spec1 != NULL){
+                    spec2= l2->first;
+                    while(spec2 != NULL){
+                        stat= cmp(spec1->data, spec2->data);
+                        if(stat == TRUE){
+                            sllInsertAsFirst(l3, spec1->data);
+                        }
+                        spec2 = spec2-> next;
+                    }
+                spec1= spec1->next;
+                }
+                
+            }
+
+            return l3;
+        }
+    }
+    return NULL;
+}
 
 //Retorna uma nova lista que é a união de l1 e l2
 SLList* sllUniao(SLList *l1, SLList *l2, int(*cmp)(void*,void*));
