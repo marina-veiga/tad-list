@@ -139,10 +139,34 @@ void *sllQuery(SLList *l, void *key, int(*cmp)(void*,void*)){
 }
 
 //Pega o dado do primeiro elemento da lista
-void *sllGetFirst(SLList *l);
-
+void *sllGetFirst(SLList *l){
+    SLNode *spec;
+    if(l!=NULL){
+        if(l->first != NULL){
+            l->cur = l->first;
+            spec = l->cur;
+            return spec->data;
+        }
+    }
+    return NULL;
+}
 //Pega o dado do próximo elemento da lista
-void *sllGetNext(SLList *l);
+void *sllGetNext(SLList *l){
+    SLNode *atual;
+    SLNode *proximo;
+    if(l != NULL){
+        if(l->cur != NULL){
+            atual = l->cur;
+            proximo= atual->next;
+            l->cur = proximo;
+            if(proximo != NULL){
+                return proximo->data;
+
+            }
+        }
+    }
+    return NULL;
+}
 
 //Retorna uma nova lista que é a intersecção de l1 e l2
 SLList* sllInterseccao(SLList *l1, SLList *l2, int(*cmp)(void*,void*)){
@@ -176,4 +200,31 @@ SLList* sllInterseccao(SLList *l1, SLList *l2, int(*cmp)(void*,void*)){
 }
 
 //Retorna uma nova lista que é a união de l1 e l2
-SLList* sllUniao(SLList *l1, SLList *l2, int(*cmp)(void*,void*));
+SLList* sllUniao(SLList *l1, SLList *l2, int(*cmp)(void*,void*)){
+    SLNode* spec1;
+    SLNode* spec2;
+    SLList* l3;
+    
+
+    if(l1 != NULL && l2 != NULL){
+        l3= sllCreate();
+        if(l3!= NULL){
+            spec1 = l1->first;
+            spec2 = l2->first;
+            while( spec1 != NULL){
+                sllInsertAsLast(l3,spec1->data);
+                spec1= spec1->next;
+            }
+            while(spec2 != NULL){
+                if(sllQuery(l3,spec2->data,cmp) == NULL){
+                    sllInsertAsLast(l3, spec2->data);
+                }
+                spec2= spec2->next;
+            }
+
+            return l3;
+        }
+        
+    }
+    return NULL;
+}
