@@ -6,12 +6,6 @@
 typedef struct _sllist_ SLList; 
 typedef struct _slnode_ SLNode;
 
-typedef struct _Filme_{
-    char nome[100];
-    int ano;
-    float notaLetter;
-}Filme; 
-
 //Cria uma nova lista vazia
 SLList *sllCreate();
 
