@@ -67,8 +67,8 @@ int main(){
         printf("\n4 - Remover de C2");
         printf("\n5 - Listar C1");
         printf("\n6 - Listar C2");
-        printf("\n7 - Gerar e Listar C3 (Uniao)\n");
-        printf("\n8 - Gerar e Listar C3 (Intersecao)\n");
+        printf("\n7 - Gerar e Listar C3 (Uniao)");
+        printf("\n8 - Gerar e Listar C3 (Intersecao)");
         printf("\n0 - Sair");
 
         printf("\nqual opcao do menu voce deseja: ");
